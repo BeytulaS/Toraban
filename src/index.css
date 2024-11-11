@@ -18,3 +18,39 @@ main {
 .logo {
   font-family: "Junge", cursive;
 }
+
+.delete-animation {
+  overflow: hidden;
+  white-space: nowrap;
+  animation-name: delete;
+  animation-duration: 0.3s;
+}
+
+@keyframes delete {
+  0% {
+    width: 100%;
+  }
+  100% {
+    width: 0%;
+    background-color: crimson;
+    opacity: 0.7;
+  }
+}
+
+.move-animation {
+  overflow: hidden;
+  white-space: nowrap;
+  animation-name: move;
+  animation-duration: 0.3s;
+}
+
+@keyframes move {
+  0% {
+    width: 100%;
+  }
+  100% {
+    width: 0%;
+    opacity: 0.5;
+    background-color: rgb(93, 255, 93);
+  }
+}

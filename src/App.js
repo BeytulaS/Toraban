@@ -1,22 +1,39 @@
 import { useState } from "react";
-import GuestView from "./components/GuestView";
 import Navbar from "./components/Navbar";
-import UserView from "./components/UserView";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import HomePage from "./pages/Home";
+import BoardsPage from "./pages/Boards";
+import BoardPage from "./pages/Board";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
   const [user, setUser] = useState(false);
 
   return (
-    <>
-      <Navbar user={user} />
-      <main className="flex flex-col items-center justify-center bg-light dark:bg-dark dark:text-light">
-        {user ? (
-          <UserView setUser={setUser} />
-        ) : (
-          <GuestView setUser={setUser} />
-        )}
+    <BrowserRouter>
+      <Navbar user={user} setUser={setUser} />
+      <main className="flex flex-col items-center justify-center bg-light dark:bg-dark text-dark dark:text-light-100">
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route
+            path="/boards"
+            element={
+              <ProtectedRoute>
+                <BoardsPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/board/:id"
+            element={
+              <ProtectedRoute>
+                <BoardPage />
+              </ProtectedRoute>
+            }
+          />
+        </Routes>
       </main>
-    </>
+    </BrowserRouter>
   );
 }
 
